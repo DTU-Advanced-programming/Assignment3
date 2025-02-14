@@ -62,7 +62,7 @@ public class ArrayList<E> implements List<E> {
     public boolean add(@NotNull E e) {
         // throw new UnsupportedOperationException("This operation is not yet implemented!");
         if(size==list.length) {
-            expandArray(list);
+            expandArray();
         }
         list[size] = e;
         return true;
@@ -133,7 +133,7 @@ public class ArrayList<E> implements List<E> {
 
     private void shiftElementsUpFrom(int pos) {
         if(size==list.length) {
-            expandArray(list);
+            expandArray();
         }
         for (int i = pos; i+1 < size; i++) {
             list[i+1] = list[i];
@@ -146,7 +146,7 @@ public class ArrayList<E> implements List<E> {
         }
     }
 
-    private void expandArray(E[] list) {
+    private void expandArray() {
         list = Arrays.copyOf(list, list.length * 2);
     }
 
