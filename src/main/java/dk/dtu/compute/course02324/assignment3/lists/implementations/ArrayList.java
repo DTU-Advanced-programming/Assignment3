@@ -47,7 +47,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public @NotNull E get(int pos) throws IndexOutOfBoundsException {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         if (0 > pos || pos > list.length) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -59,7 +58,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public E set(int pos, @NotNull E e) throws IndexOutOfBoundsException {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         if (0 > pos || pos > list.length) {
 			throw new IndexOutOfBoundsException();
 		}
@@ -72,7 +70,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean add(@NotNull E e) {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         if(size==list.length) {
             expandArray();
         }
@@ -82,7 +79,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean add(int pos, @NotNull E e) throws IndexOutOfBoundsException {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         shiftElementsUpFrom(pos);
         list[pos] = e;
         return true;
@@ -90,7 +86,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public E remove(int pos) throws IndexOutOfBoundsException {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         E helper = list[pos];
         shiftElementsDownTo(pos);
         return helper;
@@ -98,7 +93,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean remove(E e) {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         boolean removed = false;
         for (int i = 0; i < list.length; i++) {
             if(list[i]==e) {
@@ -111,7 +105,6 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public int indexOf(E e) {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
         for (int i = 0; i < size; i++) {
             if(list[i].equals(e)) {
                 return i;
@@ -122,7 +115,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void sort(@NotNull Comparator<? super E> c) throws UnsupportedOperationException {
-        // throw new UnsupportedOperationException("This operation is not yet implemented!");
+         throw new UnsupportedOperationException("This operation is not yet implemented!");
         // TODO needs implementation (Assignment 3b)
     }
 
