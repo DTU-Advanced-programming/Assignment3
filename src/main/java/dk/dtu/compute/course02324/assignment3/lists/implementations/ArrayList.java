@@ -73,14 +73,22 @@ public class ArrayList<E> implements List<E> {
         if(size==list.length) {
             expandArray();
         }
-        list[size] = e;
-        return true;
+        if (e==null) {
+			throw new IllegalStateException();
+		}
+        else {
+            list[size] = e;
+            size++;
+            return true;
+		}
+
     }
 
     @Override
     public boolean add(int pos, @NotNull E e) throws IndexOutOfBoundsException {
         shiftElementsUpFrom(pos);
         list[pos] = e;
+        size++;
         return true;
     }
 
@@ -88,6 +96,7 @@ public class ArrayList<E> implements List<E> {
     public E remove(int pos) throws IndexOutOfBoundsException {
         E helper = list[pos];
         shiftElementsDownTo(pos);
+        size--;
         return helper;
     }
 
@@ -97,6 +106,7 @@ public class ArrayList<E> implements List<E> {
         for (int i = 0; i < list.length; i++) {
             if(list[i]==e) {
                 shiftElementsDownTo(i);
+                size--;
                 removed = true;
             }
         }
