@@ -74,7 +74,7 @@ public class ArrayList<E> implements List<E> {
             expandArray();
         }
         if (e==null) {
-			throw new IllegalStateException();
+			throw new IllegalArgumentException();
 		}
         else {
             list[size] = e;
