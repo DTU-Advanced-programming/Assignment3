@@ -153,7 +153,7 @@ public class ArrayList<E> implements List<E> {
         return (E[]) new Object[length];
     }
 
-    // TODO probably some private helper methods here (avoiding duplicated code)
+    // probably some private helper methods here (avoiding duplicated code)
     //      (Assignment 3a)
 
     private void shiftElementsUpFrom(int pos) {
