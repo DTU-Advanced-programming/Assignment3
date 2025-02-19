@@ -47,7 +47,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public @NotNull E get(int pos) throws IndexOutOfBoundsException {
-        if (0 > pos || pos > list.length) {
+        if (0 > pos || pos > size) {
 			throw new IndexOutOfBoundsException();
 		}
         else {
@@ -58,11 +58,11 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public E set(int pos, @NotNull E e) throws IndexOutOfBoundsException {
-        if (0 > pos || pos > list.length) {
+        if (0 > pos || pos > size) {
 			throw new IndexOutOfBoundsException();
 		}
         else {
-        	E helper = e;
+        	E helper = list[pos];
             list[pos] = e;
             return helper;
 		}
@@ -70,47 +70,52 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean add(@NotNull E e) {
-        if(size==list.length) {
-            expandArray();
-        }
         if (e==null) {
 			throw new IllegalArgumentException();
 		}
         else {
-            list[size] = e;
-            size++;
+            if(size==list.length) {
+                expandArray();
+            }
+            list[size++] = e;
             return true;
 		}
-
     }
 
     @Override
     public boolean add(int pos, @NotNull E e) throws IndexOutOfBoundsException {
-        shiftElementsUpFrom(pos);
-        list[pos] = e;
-        size++;
-        return true;
+    	if (e==null) {
+			throw new IllegalArgumentException();
+		}
+    	else {
+        	shiftElementsUpFrom(pos);
+            list[pos] = e;
+            size++;
+            return true;
+		}
     }
 
     @Override
     public E remove(int pos) throws IndexOutOfBoundsException {
+        if (0 > pos || pos > size) {
+			throw new IndexOutOfBoundsException();
+		}
         E helper = list[pos];
         shiftElementsDownTo(pos);
         size--;
         return helper;
     }
-
+    
     @Override
     public boolean remove(E e) {
-        boolean removed = false;
-        for (int i = 0; i < list.length; i++) {
-            if(list[i]==e) {
+        for (int i = 0; i < size; i++) {
+            if(list[i].equals(e)) {
                 shiftElementsDownTo(i);
                 size--;
-                removed = true;
+                return true;
             }
         }
-        return removed;
+        return false;
     }
 
     @Override
@@ -125,8 +130,13 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void sort(@NotNull Comparator<? super E> c) throws UnsupportedOperationException {
-         throw new UnsupportedOperationException("This operation is not yet implemented!");
-        // TODO needs implementation (Assignment 3b)
+        if (c == null) throw new IllegalArgumentException();
+
+        try {
+            Arrays.sort(list, 0, size, c);
+        } catch (UnsupportedOperationException e) {
+            throw new UnsupportedOperationException("Sorting is not supported for this list implementation", e);
+        }
     }
 
     /**
@@ -150,8 +160,8 @@ public class ArrayList<E> implements List<E> {
         if(size==list.length) {
             expandArray();
         }
-        for (int i = pos; i+1 < size; i++) {
-            list[i+1] = list[i];
+        for (int i = size; i > pos; i--) {
+            list[i] = list[i-1];
         }
     }
 
