@@ -28,7 +28,7 @@ public class BubbleSort {
      */
     public static <T> void sort(@NotNull Comparator<? super T> comp, @NotNull List<T> list) {
         if (comp == null || list == null) {
-            throw new IllegalArgumentException("Arguments of the sort function must not be null.");
+            throw new IllegalArgumentException("sort, null");
         }
         boolean swapped;
         int j = list.size();

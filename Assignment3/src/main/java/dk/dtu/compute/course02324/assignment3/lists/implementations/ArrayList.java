@@ -48,7 +48,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public @NotNull E get(int pos) throws IndexOutOfBoundsException {
         if (0 > pos || pos > size) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("get");
 		}
         else {
         	return list[pos];	
@@ -59,7 +59,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public E set(int pos, @NotNull E e) throws IndexOutOfBoundsException {
         if (0 > pos || pos > size) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("set");
 		}
         else {
         	E helper = list[pos];
@@ -71,7 +71,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public boolean add(@NotNull E e) {
         if (e==null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("add 1, null");
 		}
         else {
             if(size==list.length) {
@@ -85,7 +85,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public boolean add(int pos, @NotNull E e) throws IndexOutOfBoundsException {
     	if (e==null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("add 2, null");
 		}
     	else {
         	shiftElementsUpFrom(pos);
@@ -98,7 +98,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public E remove(int pos) throws IndexOutOfBoundsException {
         if (0 > pos || pos > size) {
-			throw new IndexOutOfBoundsException();
+			throw new IndexOutOfBoundsException("remove");
 		}
         E helper = list[pos];
         shiftElementsDownTo(pos);
@@ -130,14 +130,14 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void sort(@NotNull Comparator<? super E> c) throws UnsupportedOperationException {
-        if (c == null) throw new IllegalArgumentException();
-
-        try {
-            Arrays.sort(list, 0, size, c);
-        } catch (UnsupportedOperationException e) {
-            throw new UnsupportedOperationException("Sorting is not supported for this list implementation", e);
+        if (c == null) {
+        	throw new IllegalArgumentException("sort, null");
         }
+        else {
+        	Arrays.sort(list, 0, size, c);
+		}
     }
+    
 
     /**
      * Creates a new array of type <code>E</code> with the given size.
